@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -20,10 +19,11 @@ import com.iot.app.springboot.dao.entity.TotalTrafficData;
 import com.iot.app.springboot.dao.entity.WindowTrafficData;
 import com.iot.app.springboot.vo.Response;
 
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class TrafficDataService {
-	private static final Logger logger = Logger.getLogger(TrafficDataService.class);
 	
 	@Autowired
 	private SimpMessagingTemplate template;
@@ -54,7 +54,7 @@ public class TrafficDataService {
 		response.setTotalTraffic(totalTrafficList);
 		response.setWindowTraffic(windowTrafficList);
 		response.setPoiTraffic(poiTrafficList);
-		logger.info("Sending to UI "+response);
+		log.info("Sending to UI "+response);
 		//send to ui
 		this.template.convertAndSend("/topic/trafficData", response);
 	}
