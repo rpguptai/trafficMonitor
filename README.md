@@ -1,2 +1,2 @@
 # trafficMonitor
-Application to monitor with spark streaming
+Application to monitor real time traffic with kafka and spark streaming
